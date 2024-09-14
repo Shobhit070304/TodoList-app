@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body>
+    <div class="w-full min-h-screen bg-zinc-900 text-white">
+      <!-- Nav bar -->
+      <nav class="w-full h-16 bg-white text-black">
+        <ul class="w-full h-full flex justify-around">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTldSHfSx_0SuJ2ba063dxvktCGYbLM5yd_6g&s"
+            alt=""
+          />
+          <div class="flex gap-10 font-semibold h-full items-center text-xl">
+            <a href="">Home</a>
+            <a href="/about">About</a>
+          </div>
+        </ul>
+      </nav>
+
+      <!-- Todo component -->
+      <div class="w-full h-full flex justify-center align-center">
+        <div
+          class="form w-1/3 min-h-96 bg-purple-100 text-black mt-10 rounded-md p-8"
+        >
+          <div class="form">
+            <h1 class="w-full text-center text-yellow-400 text-4xl font-bold">
+              Todo List
+            </h1>
+            <h1>Add a todo</h1>
+            <form action="/createtask" method="post">
+              <div class="w-full flex gap-2">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="enter the title"
+                  class="w-full px-3 py-2 rounded-md bg-gray-600 text-white outline-none"
+                />
+                <input
+                  type="date"
+                  name="date"
+                  class="w-full px-3 py-2 rounded-md bg-gray-600 text-white outline-none"
+                />
+              </div>
+
+              <textarea
+                type="enter the task"
+                name="task"
+                placeholder="enter the task"
+                class="w-full rounded-md text-white px-4 py-2 bg-gray-600 my-2 resize-none"
+              ></textarea>
+              <button
+                type="submit"
+                class="w-full rounded-md text-white bg-blue-500 py-1"
+              >
+                Add Task
+              </button>
+            </form>
+            <hr / class="mt-4">
+          </div>
+
+          <div class="tasks">
+            <h1 class="w-full text-xl font-bold mt-4 mb-2">Your Tasks</h1>
+            <% if(tasks.length> 0){ %> <% tasks.forEach(function(task){ %>
+            <div
+              class="task w-full bg-gray-400 px-2 py-1 rounded-md mb-1"
+            >
+              <div class=" w-full flex justify-between">
+                <div>
+                  <p class="font-semibold"><%= task.title %></p>
+                  <p class="text-sm"><%= task.task %></p>
+                </div>
+                <p class="text-sm"><%= task.date %></p>
+              </div>
+              <div class="flex w-full justify-between text-sm text-blue-900">
+                <a href="/delete/<%= task._id %>">delete</a>
+                <a href="/edit/<%= task._id %>">edit</a>
+              </div>
+            </div>
+
+            <% }); %> <% }else{ %>
+            <h1 class="text-zinc-400">No tasks now</h1>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
